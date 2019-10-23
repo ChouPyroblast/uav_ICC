@@ -1,7 +1,9 @@
-
+import time
+import sys
+start_time = time.time()
 COVERAGE = 100
-ENERGY = 300
-FILE_NAME = "1.txt"
+ENERGY = int(sys.argv[1]) #TODO
+FILE_NAME = sys.argv[2]
 
 def getDistance(point1,point2):
     return (point1.x-point2.x)**2 + (point1.y-point2.y)**2
@@ -99,9 +101,18 @@ energy = 0
 collected_data = 0
 while energy < ENERGY:
     stop_point  = max(stop_points)
+
     #print(stop_point.total_data)
-    collected_data +=stop_point.total_data
+    collected_data += stop_point.total_data
     energy += max(stop_point.sensors).data_volume
+    if energy > ENERGY:
+
+        diff = ENERGY - (energy - max(stop_point.sensors).data_volume) # The last time rest energy
+        for sensor in stop_point.sensors:
+            if sensor.data_volume > diff: # use more energy.
+                collected_data -= sensor.data_volume-diff #
 
     stop_point.collect_data()
-print(collected_data)
+
+
+print("{},{},{}".format(FILE_NAME,collected_data,time.time() - start_time))

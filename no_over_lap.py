@@ -1,10 +1,12 @@
 import sys
 import numpy as np
+import time
+start_time = time.time()
 stoppoints = []
 max_sensor_stoppoints = 0 # record the stoppoints with maximum sensors.
-energy = 300 #TODO
-
-with open("1.txt") as f:
+energy = int(sys.argv[1]) #TODO
+Filename = sys.argv[2]
+with open(Filename) as f:
     for line in f.readlines():
         sensors = line.split()
         weights = [int(x) for x in sensors]
@@ -29,6 +31,5 @@ for i in range(energy):
     matrix[stoppoint] = matrix[stoppoint]-1
     non_zero_matrix = matrix > 0
     hovering_time[stoppoint] = hovering_time[stoppoint] + 1
-print(hovering_time)
-print(total_collected_data)
-print(matrix)
+
+print("{},{},{}".format(Filename,total_collected_data,time.time() - start_time))
