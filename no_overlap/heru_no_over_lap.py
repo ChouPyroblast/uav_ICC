@@ -27,8 +27,14 @@ collected_datas = matrix.sum(axis = 1) # this is each stoppoints' collected data
 hovering_time = matrix.max(axis = 1) # this is each stoppoints' hovering time.
 while energy <= Energy:
     i = np.argmax(collected_datas)
-    energy += hovering_time[i]
-    total_collected_data += collected_datas[i]
-    collected_datas[i]=0
+    if hovering_time[i]> Energy-energy:
+        diff = Energy - energy
+        for data in matrix[i]:
+            total_collected_data += min(data,diff)
+        break
+    else:
+        energy += hovering_time[i]
+        total_collected_data += collected_datas[i]
+        collected_datas[i]=0
 
 print("{},{},{}".format(Filename,total_collected_data,time.time() - start_time))
