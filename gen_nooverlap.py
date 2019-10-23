@@ -1,10 +1,10 @@
 import numpy as np
 import sys
-numberofsensor = 1000
+numberofsensor = 10000
 numberofstop = 100
 numberofmap = 50
 for map in range(numberofmap):
-    sensors = np.random.randint(low=1000, size = numberofsensor)
+    sensors = np.random.randint(low=100, size = numberofsensor)
     stoppoints = []
     for i in range(numberofstop):
         stoppoints.append([])

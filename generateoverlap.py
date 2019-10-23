@@ -1,7 +1,7 @@
 import numpy as np
 import random
-max_data = 1000
-max_sensor = 1000
+max_data = 100
+max_sensor = 10000
 max_length = 1000
 numberofmap = 50
 for map in range(numberofmap):
