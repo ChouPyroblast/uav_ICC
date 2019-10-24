@@ -2,6 +2,7 @@ from numpy.linalg import norm
 import sys
 import queue as Q
 import time
+import numpy as np
 start_time = time.time()
 COVERAGE = 100
 ENERGY = int(sys.argv[1])

@@ -1,5 +1,6 @@
 import time
 import sys
+import numpy as np
 start_time = time.time()
 COVERAGE = 100
 ENERGY = int(sys.argv[1]) #TODO
