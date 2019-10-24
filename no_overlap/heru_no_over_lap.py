@@ -5,7 +5,7 @@ start_time = time.time()
 
 stoppoints = []
 max_sensor_stoppoints = 0 # record the stoppoints with maximum sensors.
-Energy = int(sys.argv[1]) #TODO
+Energy = int(sys.argv[1])
 Filename = sys.argv[2]
 
 with open(Filename) as f:
@@ -27,14 +27,8 @@ collected_datas = matrix.sum(axis = 1) # this is each stoppoints' collected data
 hovering_time = matrix.max(axis = 1) # this is each stoppoints' hovering time.
 while energy <= Energy:
     i = np.argmax(collected_datas)
-    if hovering_time[i]> Energy-energy:
-        diff = Energy - energy
-        for data in matrix[i]:
-            total_collected_data += min(data,diff)
-        break
-    else:
-        energy += hovering_time[i]
-        total_collected_data += collected_datas[i]
-        collected_datas[i]=0
+    energy += hovering_time[i]
+    total_collected_data += collected_datas[i]
+    collected_datas[i]=0
 
 print("{},{},{}".format(Filename,total_collected_data,time.time() - start_time))

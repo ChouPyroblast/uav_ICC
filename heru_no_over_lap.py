@@ -5,7 +5,7 @@ start_time = time.time()
 
 stoppoints = []
 max_sensor_stoppoints = 0 # record the stoppoints with maximum sensors.
-Energy = int(sys.argv[1]) #TODO
+Energy = int(sys.argv[1])
 Filename = sys.argv[2]
 
 with open(Filename) as f:

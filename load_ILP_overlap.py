@@ -2,10 +2,11 @@ from numpy.linalg import norm
 import sys
 import queue as Q
 import time
+import numpy as np
 start_time = time.time()
 COVERAGE = 100
-ENERGY = int(sys.argv[1])
-FILE_NAME = sys.argv[2]
+#ENERGY = int(sys.argv[1])
+FILE_NAME = sys.argv[1]
 
 def getDistance(point1,point2):
     return np.sqrt((point1.x-point2.x)**2 + (point1.y-point2.y)**2)
@@ -59,7 +60,6 @@ class StopPoint():
 
     def __ge__(self, other):
         return self.number_of_sensors >= other.number_of_sensors
-# load sensors from .txt file
 
 
 sensors = []
@@ -78,26 +78,11 @@ for i in range(0,1001,100):
         stop_point = StopPoint(i,j,sensors)
         stop_points.append(stop_point)
 
-total_collected_data = 0
-for i in range(ENERGY):
-    stop_point = max(stop_points)
-    total_collected_data += stop_point.number_of_sensors
-    stop_point.collect_data()
 
-print("{},{},{}".format(FILE_NAME,total_collected_data,time.time() - start_time))
+in_range = np.zeros((len(sensors),len(stop_points)))
+for i in range(len(sensors)):
+    for j in range(len(stop_points)):
+        if sensors[i] in stop_points[j].sensors:
+            in_range[i,j] = 1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+data_volumes = [sensor.data_volume for sensor in sensors]
