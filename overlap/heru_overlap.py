@@ -53,10 +53,12 @@ class StopPoint():
     def collect_data(self):
         for sensor_ in self.sensors:  # for each sensor in range
             for stop_point_ in sensor_.stop_points:  # find all stoppoints who have this sensor\
+                if stop_point == self:
+                    continue
                 stop_point_.sensors.remove(sensor_)  # TODO bug here remove this sensor from their sensors
                 stop_point_.total_data -= sensor_.data_volume  # recalculate.
             sensor_.data_volume = 0
-
+        self.total_data = -1
     def __lt__(self, other):
 
         return self.total_data<other.total_data

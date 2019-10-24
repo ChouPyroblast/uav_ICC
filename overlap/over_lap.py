@@ -36,11 +36,17 @@ class StopPoint():
     def collect_data(self):
         for sensor in self.sensors:  # for each sensor in range
             sensor.data_volume = sensor.data_volume - 1 # sensor data volume - 1
+            self_deleted = []
             if sensor.data_volume == 0:  # if no more data
                 for stop_point in sensor.stop_points:  # find all stoppoints who have this sensor
+                    if stop_point == self:
+                        self_deleted.append(sensor)
+                        continue
                     stop_point.sensors.remove(sensor)  # remove this sensor from their sensors
                     stop_point.number_of_sensors = len(stop_point.sensors)  # recalculate.
-
+        for sensor in self_deleted:
+            self.sensors.remove(sensor)
+        self.number_of_sensors = len(self.sensors)
     def __lt__(self, other):
 
         return self.number_of_sensors<other.number_of_sensors
