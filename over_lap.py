@@ -79,6 +79,8 @@ for i in range(0,1001,100):
         stop_point = StopPoint(i,j,sensors)
         stop_points.append(stop_point)
 
+
+
 total_collected_data = 0
 for i in range(ENERGY):
     stop_point = max(stop_points)

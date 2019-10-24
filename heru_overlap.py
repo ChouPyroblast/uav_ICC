@@ -48,18 +48,15 @@ class StopPoint():
                 self.sensors.append(sensor)
                 sensor.stop_points.append(self)
                 self.total_data += sensor.data_volume
-
-        #self.number_of_sensors = len(self.sensors)
-
         self.collected_data = 0
 
     def collect_data(self):
-        for sensor in self.sensors:  # for each sensor in range
-              # sensor data volume - 1
-            for stop_point in sensor.stop_points:  # find all stoppoints who have this sensor
-                stop_point.sensors.remove(sensor)  # remove this sensor from their sensors
-                stop_point.total_data -= sensor.data_volume  # recalculate.
-            sensor.data_volume = 0
+        for sensor_ in self.sensors:  # for each sensor in range
+            for stop_point_ in sensor_.stop_points:  # find all stoppoints who have this sensor\
+                stop_point_.sensors.remove(sensor_)  # remove this sensor from their sensors
+                stop_point_.total_data -= sensor_.data_volume  # recalculate.
+            sensor_.data_volume = 0
+
     def __lt__(self, other):
 
         return self.total_data<other.total_data
